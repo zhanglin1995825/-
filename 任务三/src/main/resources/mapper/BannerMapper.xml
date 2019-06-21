@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Banner">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createat" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="createby" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="updateat" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="updateby" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="state" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, url, img, createat, createby, updateat, updateby, state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Banner">
+    insert into banner (id, url, img, 
+      createat, createby, updateat, 
+      updateby, state)
+    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{createat,jdbcType=BIGINT}, #{createby,jdbcType=VARCHAR}, #{updateat,jdbcType=BIGINT}, 
+      #{updateby,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Banner">
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="createat != null">
+        createat,
+      </if>
+      <if test="createby != null">
+        createby,
+      </if>
+      <if test="updateat != null">
+        updateat,
+      </if>
+      <if test="updateby != null">
+        updateby,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        #{createat,jdbcType=BIGINT},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateat != null">
+        #{updateat,jdbcType=BIGINT},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Banner">
+    update banner
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="createat != null">
+        createat = #{createat,jdbcType=BIGINT},
+      </if>
+      <if test="createby != null">
+        createby = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateat != null">
+        updateat = #{updateat,jdbcType=BIGINT},
+      </if>
+      <if test="updateby != null">
+        updateby = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Banner">
+    update banner
+    set url = #{url,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      createat = #{createat,jdbcType=BIGINT},
+      createby = #{createby,jdbcType=VARCHAR},
+      updateat = #{updateat,jdbcType=BIGINT},
+      updateby = #{updateby,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List"/>from banner where state=1
+  </select>
+</mapper>
